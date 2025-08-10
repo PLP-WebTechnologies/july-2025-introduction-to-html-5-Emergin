@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enhanced Registration Form</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        main {
+            padding: 40px;
+        }
+
+        section {
+            margin-bottom: 40px;
+        }
+
+        h2 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+            margin-bottom: 25px;
+            font-size: 1.8rem;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .info-card {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .info-card h3 {
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+
+        .info-card ul {
+            list-style: none;
+        }
+
+        .info-card li {
+            padding: 5px 0;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .info-card li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #fff;
+            font-weight: bold;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-weight: 600;
+        }
+
+        tr:hover {
+            background-color: #f8f9fa;
+        }
+
+        .media-container {
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .media-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-container {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            padding: 40px;
+            border-radius: 15px;
+            margin-top: 30px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 10px rgba(52, 152, 219, 0.3);
+            transform: translateY(-2px);
+        }
+
+        input:valid {
+            border-color: #27ae60;
+        }
+
+        input:invalid:not(:placeholder-shown) {
+            border-color: #e74c3c;
+        }
+
+        .checkbox-group, .radio-group {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .checkbox-item, .radio-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .checkbox-item input, .radio-item input {
+            width: auto;
+            margin: 0;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .required {
+            color: #e74c3c;
+        }
+
+        .readonly-info {
+            background: #ecf0f1;
+            color: #7f8c8d;
+            font-style: italic;
+        }
+
+        @media (max-width: 768px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            header h1 {
+                font-size: 2rem;
+            }
+            
+            main {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Professional Registration Portal</h1>
+            <p>Complete your profile with our comprehensive registration system</p>
+        </header>
+
+        <main>
+            <section>
+                <h2>About Our Platform</h2>
+                <div class="info-grid">
+                    <div class="info-card">
+                        <h3>Why Join Us?</h3>
+                        <ul>
+                            <li>Access to exclusive professional networks</li>
+                            <li>Career development opportunities</li>
+                            <li>Industry insights and trends</li>
+                            <li>Networking events and workshops</li>
+                            <li>Certification programs</li>
+                        </ul>
+                    </div>
+                    <div class="info-card">
+                        <h3>Membership Benefits</h3>
+                        <ul>
+                            <li>24/7 customer support</li>
+                            <li>Mobile app access</li>
+                            <li>Priority booking for events</li>
+                            <li>Quarterly industry reports</li>
+                            <li>Peer mentorship programs</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>Membership Tiers</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Tier</th>
+                            <th>Monthly Fee</th>
+                            <th>Features</th>
+                            <th>Support Level</th>
+                            <th>Event Access</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Basic</strong></td>
+                            <td>$29/month</td>
+                            <td>Profile, Basic Networking</td>
+                            <td>Email Support</td>
+                            <td>Public Events</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Professional</strong></td>
+                            <td>$59/month</td>
+                            <td>All Basic + Analytics</td>
+                            <td>Chat Support</td>
+                            <td>Premium Events</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Enterprise</strong></td>
+                            <td>$99/month</td>
+                            <td>All Professional + API Access</td>
+                            <td>Phone + Priority</td>
+                            <td>Exclusive Events</td>
+                        </tr>
+                        <tr>
+                            <td><strong>VIP</strong></td>
+                            <td>$149/month</td>
+                            <td>All Enterprise + Custom Features</td>
+                            <td>Dedicated Manager</td>
+                            <td>All Events + Private</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section>
+                <h2>Platform Overview</h2>
+                <div class="media-container">
+                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                         alt="Professional networking platform overview showing diverse team collaboration" 
+                         width="800" height="400">
+                    <p><em>Join thousands of professionals already growing their careers with our platform</em></p>
+                </div>
+            </section>
+
+            <section>
+                <h2>Registration Form</h2>
+                <div class="form-container">
+                    <form action="#" method="POST" novalidate>
+                        <div class="form-grid">
+                            <!-- Personal Information -->
+                            <div class="form-group">
+                                <label for="firstName">First Name <span class="required">*</span></label>
+                                <input type="text" 
+                                       id="firstName" 
+                                       name="firstName" 
+                                       required 
+                                       placeholder="Enter your first name"
+                                       autocomplete="given-name"
+                                       minlength="2"
+                                       maxlength="50">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="lastName">Last Name <span class="required">*</span></label>
+                                <input type="text" 
+                                       id="lastName" 
+                                       name="lastName" 
+                                       required 
+                                       placeholder="Enter your last name"
+                                       autocomplete="family-name"
+                                       minlength="2"
+                                       maxlength="50">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email">Email Address <span class="required">*</span></label>
+                                <input type="email" 
+                                       id="email" 
+                                       name="email" 
+                                       required 
+                                       placeholder="your.email@example.com"
+                                       autocomplete="email">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="phone">Phone Number <span class="required">*</span></label>
+                                <input type="tel" 
+                                       id="phone" 
+                                       name="phone" 
+                                       required 
+                                       placeholder="+1 (555) 123-4567"
+                                       autocomplete="tel"
+                                       pattern="[+]?[0-9\s\-\(\)]{10,}">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="birthDate">Date of Birth <span class="required">*</span></label>
+                                <input type="date" 
+                                       id="birthDate" 
+                                       name="birthDate" 
+                                       required 
+                                       min="1950-01-01" 
+                                       max="2005-12-31"
+                                       autocomplete="bday">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="website">Personal Website</label>
+                                <input type="url" 
+                                       id="website" 
+                                       name="website" 
+                                       placeholder="https://www.yourwebsite.com"
+                                       autocomplete="url">
+                            </div>
+
+                            <!-- Professional Information -->
+                            <div class="form-group">
+                                <label for="company">Current Company <span class="required">*</span></label>
+                                <input type="text" 
+                                       id="company" 
+                                       name="company" 
+                                       required 
+                                       placeholder="Your company name"
+                                       autocomplete="organization">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="jobTitle">Job Title <span class="required">*</span></label>
+                                <input type="text" 
+                                       id="jobTitle" 
+                                       name="jobTitle" 
+                                       required 
+                                       placeholder="Your current position"
+                                       autocomplete="organization-title">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="industry">Industry</label>
+                                <select id="industry" name="industry" required>
+                                    <option value="">Select your industry</option>
+                                    <option value="technology">Technology</option>
+                                    <option value="finance">Finance</option>
+                                    <option value="healthcare">Healthcare</option>
+                                    <option value="education">Education</option>
+                                    <option value="manufacturing">Manufacturing</option>
+                                    <option value="retail">Retail</option>
+                                    <option value="consulting">Consulting</option>
+                                    <option value="media">Media & Entertainment</option>
+                                    <option value="nonprofit">Non-Profit</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="experience">Years of Experience</label>
+                                <input type="number" 
+                                       id="experience" 
+                                       name="experience" 
+                                       min="0" 
+                                       max="50" 
+                                       placeholder="Enter number of years">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="salary">Annual Salary Range</label>
+                                <input type="range" 
+                                       id="salary" 
+                                       name="salary" 
+                                       min="30000" 
+                                       max="500000" 
+                                       step="5000" 
+                                       value="75000"
+                                       oninput="document.getElementById('salaryValue').textContent = '$' + parseInt(this.value).toLocaleString()">
+                                <span id="salaryValue">$75,000</span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="startDate">Preferred Start Date</label>
+                                <input type="datetime-local" 
+                                       id="startDate" 
+                                       name="startDate">
+                            </div>
+
+                            <!-- Account Settings -->
+                            <div class="form-group">
+                                <label for="username">Username <span class="required">*</span></label>
+                                <input type="text" 
+                                       id="username" 
+                                       name="username" 
+                                       required 
+                                       placeholder="Choose a unique username"
+                                       autocomplete="username"
+                                       pattern="[a-zA-Z0-9_]{3,20}"
+                                       title="Username must be 3-20 characters, letters, numbers, and underscores only">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="password">Password <span class="required">*</span></label>
+                                <input type="password" 
+                                       id="password" 
+                                       name="password" 
+                                       required 
+                                       placeholder="Create a strong password"
+                                       autocomplete="new-password"
+                                       minlength="8"
+                                       pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}"
+                                       title="Password must be at least 8 characters with uppercase, lowercase, number, and special character">
+                            </div>
+
+                            <!-- Readonly fields -->
+                            <div class="form-group">
+                                <label for="registrationId">Registration ID</label>
+                                <input type="text" 
+                                       id="registrationId" 
+                                       name="registrationId" 
+                                       value="REG-2025-001234" 
+                                       readonly 
+                                       class="readonly-info">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="registrationDate">Registration Date</label>
+                                <input type="text" 
+                                       id="registrationDate" 
+                                       name="registrationDate" 
+                                       value="August 10, 2025" 
+                                       readonly 
+                                       class="readonly-info">
+                            </div>
+
+                            <!-- File Upload -->
+                            <div class="form-group">
+                                <label for="resume">Upload Resume (PDF only)</label>
+                                <input type="file" 
+                                       id="resume" 
+                                       name="resume" 
+                                       accept=".pdf"
+                                       required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="profileImage">Profile Image</label>
+                                <input type="file" 
+                                       id="profileImage" 
+                                       name="profileImage" 
+                                       accept="image/*">
+                            </div>
+
+                            <!-- Preferences -->
+                            <div class="form-group full-width">
+                                <label>Membership Tier <span class="required">*</span></label>
+                                <div class="radio-group">
+                                    <div class="radio-item">
+                                        <input type="radio" id="basic" name="membershipTier" value="basic" required>
+                                        <label for="basic">Basic ($29/month)</label>
+                                    </div>
+                                    <div class="radio-item">
+                                        <input type="radio" id="professional" name="membershipTier" value="professional">
+                                        <label for="professional">Professional ($59/month)</label>
+                                    </div>
+                                    <div class="radio-item">
+                                        <input type="radio" id="enterprise" name="membershipTier" value="enterprise">
+                                        <label for="enterprise">Enterprise ($99/month)</label>
+                                    </div>
+                                    <div class="radio-item">
+                                        <input type="radio" id="vip" name="membershipTier" value="vip">
+                                        <label for="vip">VIP ($149/month)</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group full-width">
+                                <label>Areas of Interest (Select all that apply)</label>
+                                <div class="checkbox-group">
+                                    <div class="checkbox-item">
+                                        <input type="checkbox" id="networking" name="interests" value="networking">
+                                        <label for="networking">Networking Events</label>
+                                    </div>
+                                    <div class="checkbox-item">
+                                        <input type="checkbox" id="training" name="interests" value="training">
+                                        <label for="training">Professional Training</label>
+                                    </div>
+                                    <div class="checkbox-item">
+                                        <input type="checkbox" id="mentorship" name="interests" value="mentorship">
+                                        <label for="mentorship">Mentorship Programs</label>
+                                    </div>
+                                    <div class="checkbox-item">
+                                        <input type="checkbox" id="certifications" name="interests" value="certifications">
+                                        <label for="certifications">Certifications</label>
+                                    </div>
+                                    <div class="checkbox-item">
+                                        <input type="checkbox" id="jobBoard" name="interests" value="jobBoard">
+                                        <label for="jobBoard">Job Board Access</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Text Areas -->
+                            <div class="form-group full-width">
+                                <label for="bio">Professional Biography</label>
+                                <textarea id="bio" 
+                                          name="bio" 
+                                          placeholder="Tell us about your professional background and career goals..."
+                                          maxlength="500"></textarea>
+                            </div>
+
+                            <div class="form-group full-width">
+                                <label for="goals">Career Goals <span class="required">*</span></label>
+                                <textarea id="goals" 
+                                          name="goals" 
+                                          required 
+                                          placeholder="Describe your short-term and long-term career objectives..."
+                                          minlength="50"
+                                          maxlength="1000"></textarea>
+                            </div>
+
+                            <!-- Agreement -->
+                            <div class="form-group full-width">
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="terms" name="terms" required>
+                                    <label for="terms">I agree to the <a href="#" target="_blank">Terms of Service</a> and <a href="#" target="_blank">Privacy Policy</a> <span class="required">*</span></label>
+                                </div>
+                            </div>
+
+                            <div class="form-group full-width">
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="newsletter" name="newsletter" value="yes">
+                                    <label for="newsletter">Subscribe to our monthly newsletter with industry insights</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="submit-btn">Complete Registration</button>
+                    </form>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+</html>
